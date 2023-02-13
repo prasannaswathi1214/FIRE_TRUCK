@@ -1,0 +1,32 @@
+from collections import defaultdict
+
+def dfs(path, visit):
+    if path[-1] == n:
+        global flag
+        flag += 1
+        print(*path)
+        return
+    for i in default_dict[path[-1]]:
+        if i not in visit:
+            path.append(i)
+            visit.add(i)
+            dfs(path,visit)
+            path.pop() #backtrack
+            visit.remove(i)
+
+for t in range(1, int(input()) + 1):
+    n = int(input())
+    default_dict = defaultdict(list)
+    while 1:
+        x, y = map(int, input().split())
+        if x == 0 and y == 0:
+            break
+        default_dict[x].append(y)
+        default_dict[y].append(x)
+    for i in default_dict:
+            default_dict[i].sort()
+    print('case' + str(t) + ':')
+    # t += 1
+    flag = 0
+    dfs([1], {1})
+    print(' There are ' + str(flag) + ' routes from the firestation to streetcorner ' + str(n) + '.')
